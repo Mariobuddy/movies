@@ -1,7 +1,6 @@
 import React from "react";
 import { styled } from "styled-components";
 import fallPoster from "../../assests/7718877.jpg";
-import LazyLoading from "../../components/Lazy/LazyLoading";
 import { useSelector } from "react-redux";
 import CircleRating from "../CircleRating/CircleRating";
 import Genres from "../Genres/Genres";
@@ -54,7 +53,7 @@ const CarouselCom = ({ loading, data }) => {
               return (
                 <div key={i} className="mainDiv3">
                   <div className="fDiv">
-                    <LazyLoading src={poster} />
+                    <img src={poster} alt="Rohit" />
                     <CircleRating
                       rating={datainner?.vote_average?.toFixed(1)}
                     />
@@ -88,7 +87,6 @@ export default CarouselCom;
 
 const Wrapper = styled.div`
   width: 100%;
-  cursor: pointer;
 
   .carousel-container {
     width: 100% !important;
@@ -112,15 +110,14 @@ const Wrapper = styled.div`
       margin: 0rem 1rem 0rem 1.2rem;
       border-radius: 0.2rem;
       width: fit-content;
+      cursor: pointer;
 
       .fDiv {
         height: fit-content;
         position: relative;
-        .lazy-load-image-background {
           img {
             width: 25rem;
             height: 35rem;
-          }
         }
       }
       .sDiv {

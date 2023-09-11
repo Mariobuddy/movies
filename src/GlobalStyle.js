@@ -7,6 +7,11 @@ export const GlobalStyle = createGlobalStyle`
   --dim1:#ddd6d6;
   --wcol:#FFFFFF;
 }
+
+body{
+  background-color:#04152d;
+}
+
 * {
   margin: 0;
   padding: 0;

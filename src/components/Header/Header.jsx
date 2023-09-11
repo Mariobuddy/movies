@@ -56,7 +56,6 @@ const Header = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    console.log("hello");
   }, [location]);
   return (
     <Wrapper className={currentScroll}>

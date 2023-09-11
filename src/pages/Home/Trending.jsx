@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useDeferredValue } from "react";
 import { styled } from "styled-components";
 import Switch from "../../components/Switch/Switch";
 import useFetch from "../../hooks/useFetch";
@@ -11,15 +11,15 @@ const Trending = () => {
     setEndPoint(tabs === "Day" ? "day" : "week");
   };
   const { data, loading } = useFetch(`/trending/all/${endPoint}`);
+  let def = useDeferredValue(data);
   return (
     <Wrapper>
       <div className="topDiv">
         <div className="upperDiv">
-          {" "}
           <p>Trending</p>
           <Switch onTabChange={onTabChange} data1={data1} />
         </div>
-        <CarouselCom data={data} loading={loading} />
+        <CarouselCom data={def} loading={loading} />
       </div>
     </Wrapper>
   );
@@ -29,7 +29,6 @@ export default Trending;
 
 const Wrapper = styled.div`
   height: fit-content;
-  background-color: var(--bg);
   padding: 2rem 8rem;
   width: 100%;
 
