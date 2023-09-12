@@ -157,7 +157,7 @@ const Wrapper = styled.div`
   }
 
   @media (min-width: 390px) and (max-width: 768px) {
-    height: 40rem;
+    height: 50rem;
     flex-direction: column;
 
     .content {

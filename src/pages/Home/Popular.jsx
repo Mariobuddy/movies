@@ -1,22 +1,22 @@
 import React, { useState, useDeferredValue } from "react";
 import { styled } from "styled-components";
-import Switch from "../../components/Switch/Switch";
 import useFetch from "../../hooks/useFetch";
 import CarouselCom from "../../components/Carousel/Carousel";
+import Switch from "../../components/Switch/Switch";
 
-const Trending = () => {
-  const data1 = ["Day", "Week"];
-  const [endPoint, setEndPoint] = useState("day");
+const Popular = () => {
+  const data1 = ["Movies", "Tv Shows"];
+  const [endPoint, setEndPoint] = useState("movie");
   let onTabChange = (tabs) => {
-    setEndPoint(tabs === "Day" ? "day" : "week");
+    setEndPoint(tabs === "Movies" ? "movie" : "tv");
   };
-  const { data, loading } = useFetch(`/trending/all/${endPoint}`);
+  const { data, loading } = useFetch(`/${endPoint}/popular`);
   let def = useDeferredValue(data);
   return (
     <Wrapper>
       <div className="topDiv">
         <div className="upperDiv">
-          <p>Trending</p>
+          <p>Popular</p>
           <Switch onTabChange={onTabChange} data1={data1}/>
         </div>
         <CarouselCom data={def} loading={loading} end={endPoint} />
@@ -25,13 +25,12 @@ const Trending = () => {
   );
 };
 
-export default Trending;
+export default Popular;
 
 const Wrapper = styled.div`
   height: fit-content;
   padding: 2rem 8rem;
   width: 100%;
-
   .topDiv {
     width: 100%;
     height: fit-content;
