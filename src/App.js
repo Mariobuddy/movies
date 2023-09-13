@@ -60,7 +60,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="*" element={<Explore />} />
-          <Route path="*" element={<Details />} />
+          <Route path="/:mediaType/:id" element={<Details />} />
           <Route path="/search/:query" element={<SearchResults />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>

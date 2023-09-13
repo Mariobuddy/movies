@@ -76,8 +76,8 @@ const Wrapper = styled.div`
       height: fit-content;
       position: relative;
       .img {
-        width: 25rem;
-        height: 30rem;
+        width: 32rem;
+        height: 40rem;
       }
     }
     .sDiv {

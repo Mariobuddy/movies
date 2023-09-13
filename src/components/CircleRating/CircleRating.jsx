@@ -3,9 +3,9 @@ import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { styled } from "styled-components";
 
-const CircleRating = ({ rating }) => {
+const CircleRating = ({ rating ,className}) => {
   return (
-    <Wrapper>
+    <Wrapper className={className}>
       <CircularProgressbar
         maxValue={10}
         value={rating}
@@ -24,16 +24,15 @@ const CircleRating = ({ rating }) => {
 export default CircleRating;
 
 const Wrapper = styled.div`
-  position: absolute;
-  bottom: -2rem;
-  left: 0;
-  width: 4rem;
-  height: 4rem;
   .CircularProgressbar-trail {
     stroke: #b5b3b348;
   }
   .CircularProgressbar-text {
-    fill: #151414 !important;
+    fill: #FFFFFF !important;
     font-weight: 700;
+  }
+
+  .CircularProgressbar-background {
+    fill: transparent !important;
   }
 `;

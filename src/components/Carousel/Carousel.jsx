@@ -61,7 +61,7 @@ const CarouselCom = ({ loading, data,end }) => {
             itemClass="carousel-item"
           >
             {data?.results?.map((datainner, i) => {
-              let poster = datainner.poster_path
+              let poster = datainner?.poster_path
                 ? url?.poster + datainner?.poster_path
                 : fallPoster;
               let date = dayjs(
@@ -72,9 +72,9 @@ const CarouselCom = ({ loading, data,end }) => {
                   <div className="fDiv">
                     <img src={poster} alt="Rohit" />
                     <CircleRating
-                      rating={datainner?.vote_average?.toFixed(1)}
+                      rating={datainner?.vote_average?.toFixed(1)} className="cSend"
                     />
-                    <Genres val={datainner?.genre_ids} />
+                    <Genres val={datainner?.genre_ids} className="fSend" className2="sSend" />
                   </div>
                   <div className="sDiv">
                     <p className="p1">
@@ -108,8 +108,40 @@ const CarouselCom = ({ loading, data,end }) => {
 
 export default CarouselCom;
 
+
 const Wrapper = styled.div`
   width: 100%;
+
+  .cSend{
+  position: absolute;
+  bottom: -2rem;
+  left: 0;
+  width: 4rem;
+  height: 4rem;
+  }
+
+  
+.fSend{
+  font-size: 1.4rem;
+    display: flex;
+    color: #FFFFFF;
+    flex-direction: column;
+    width: fit-content;
+    background-color: #dd1f58;
+    padding: 0.4rem;
+    border-radius: 0.4rem;
+    margin-bottom: 0.5rem;
+}
+
+.sSend{
+position: absolute;
+bottom: 0;
+right: 0;
+display: flex;
+justify-content: center;
+align-items: flex-end;
+flex-direction: column;
+}
 
   .carousel-container {
     width: 100% !important;
