@@ -5,7 +5,7 @@ import { getApiConfiguration, getGenres } from "./store/homeSlice";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Header from "./components/Header/Header";
-// import Footer from "./components/Footer/Footer";
+import Footer from "./components/Footer/Footer";
 import SearchResults from "./pages/SearchResult/SearchResults";
 import Details from "./pages/Details/Details";
 import Explore from "./pages/Explore/Explore";

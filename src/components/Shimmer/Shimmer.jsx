@@ -10,7 +10,7 @@ const Shimmer = () => {
         <Skeleton className="img ani" />
       </div>
       <div className="sDiv">
-        <p className="p1 ani">{<Skeleton className="ani" />}</p>
+        <p className="p1">{<Skeleton className="ani" />}</p>
         <p>{<Skeleton className="ani" />}</p>
       </div>
     </Wrapper>
@@ -67,7 +67,7 @@ const Wrapper = styled.div`
 
   @media (min-width: 390px) and (max-width: 768px) {
     width: 32rem;
-    height: 40rem;
+    height: 47rem;
     border-radius: 0.2rem;
     border: 2px solid transparent;
     margin: 0rem 1rem 0rem 1.2rem;
@@ -77,12 +77,12 @@ const Wrapper = styled.div`
       position: relative;
       .img {
         width: 32rem;
-        height: 40rem;
+        height: 37rem;
       }
     }
     .sDiv {
       width: 25rem;
-      height: fit-content;
+      height: 10rem;
       padding-top: 3rem;
       p {
         font-size: 1.2rem;

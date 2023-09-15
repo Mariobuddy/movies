@@ -7,7 +7,15 @@ const Shimmer3 = () => {
   return (
     <Wrapper>
       <div className="innerDiv">
-        <Skeleton width={160} className="ani" height={160} circle={true} />
+        <div className="imgDiv">
+          <Skeleton circle={true} className="ani imgOne" />
+        </div>
+        <p className="pname">
+          <Skeleton className="ani" />
+        </p>
+        <p className="pchar">
+          <Skeleton className="ani" />
+        </p>
       </div>
     </Wrapper>
   );
@@ -45,16 +53,10 @@ const Wrapper = styled.div`
     .imgDiv {
       width: 15rem;
       height: 15rem;
-      .lazy-load-image-background {
-        width: 100%;
-        height: 100%;
-        img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          object-position: center;
-          border-radius: 50%;
-        }
+
+      .imgOne {
+        width: 15rem;
+        height: 15rem;
       }
     }
 
@@ -75,6 +77,49 @@ const Wrapper = styled.div`
       white-space: nowrap;
       width: 12rem;
       text-align: center;
+    }
+  }
+
+  @media (min-width: 390px) and (max-width: 768px) {
+    display: flex;
+    margin-top: 1rem;
+
+    .innerDiv {
+      width: fit-content;
+      height: fit-content;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      margin: 0rem 1rem;
+
+      .imgDiv {
+        width: 13.2rem;
+        height: 13.2rem;
+        .imgOne {
+          width: 13.2rem;
+          height: 13.2rem;
+        }
+      }
+
+      .pname {
+        color: #ffffff;
+        font-size: 1.4rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: 12rem;
+        text-align: center;
+      }
+      .pchar {
+        color: var(--dim1);
+        font-size: 1.2rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: 12rem;
+        text-align: center;
+      }
     }
   }
 `;

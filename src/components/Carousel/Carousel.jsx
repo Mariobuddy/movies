@@ -124,7 +124,6 @@ export default CarouselCom;
 
 const Wrapper = styled.div`
   width: 100%;
-
   .cSend {
     position: absolute;
     bottom: -2rem;
@@ -254,7 +253,7 @@ const Wrapper = styled.div`
           position: relative;
           .imgDiv1 {
             width: 32rem;
-            height: 40rem;
+            height: 37rem;
             .lazy-load-image-background {
               width: 100%;
               height: 100%;

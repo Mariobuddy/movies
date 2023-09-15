@@ -137,15 +137,16 @@ const Wrapper = styled.div`
   height: 60rem;
   position: relative;
   padding-top: 10rem;
+  padding-bottom: 4rem;
   color: #ffffff;
   position: relative;
 
   .load {
     width: 100%;
-    height: 60rem;
-    position: relative;
+    height: 100%;
     color: #ffffff;
     position: relative;
+
   }
 
   .imgDiv {
@@ -285,7 +286,7 @@ const Wrapper = styled.div`
         bottom: 0;
         left: 0;
         bottom: -0.5rem;
-        width: 100%;
+        width: 81%;
         height: 2px; /* Adjust the height as needed */
         background-color: #85818166; /* Color of the line */
       }
@@ -303,7 +304,7 @@ const Wrapper = styled.div`
         bottom: 0;
         left: 0;
         bottom: -0.5rem;
-        width: 100%;
+        width: 81%;
         height: 2px; /* Adjust the height as needed */
         background-color: #85818166; /* Color of the line */
       }
@@ -329,7 +330,7 @@ const Wrapper = styled.div`
         bottom: 0;
         left: 0;
         bottom: -0.5rem;
-        width: 100%;
+        width: 81%;
         height: 2px; /* Adjust the height as needed */
         background-color: #85818166; /* Color of the line */
       }
@@ -386,13 +387,15 @@ const Wrapper = styled.div`
       }
 
       .sDiv {
-        width: 40%;
+        width: fit-content;
         display: flex;
         flex-direction: column;
 
         .phead {
           font-size: 2.5rem;
           margin-top: 1rem;
+          padding-right: 3rem;
+          width: 35rem;
         }
 
         .ptag {

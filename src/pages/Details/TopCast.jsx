@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
@@ -9,6 +9,20 @@ import Shimmer3 from "../../components/Shimmer/Shimmer3";
 
 const TopCast = ({ data, load }) => {
   let { url } = useSelector((state) => state.home);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    function handleResize() {
+      setIsMobile(window.innerWidth <= 768);
+    }
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
@@ -26,43 +40,55 @@ const TopCast = ({ data, load }) => {
     },
     mobile: {
       breakpoint: { max: 768, min: 0 },
-      items: 1,
+      items: 2,
+      slidesToSlide: 2,
     },
   };
   return (
     <Wrapper>
       <p className="ptop">Top Cast</p>
       {!load && data?.length > 0 ? (
-        
         <div className="mainDiv">
           <Carousel
-          responsive={responsive}
-          swipeable={true}
-          draggable={true}
-          containerClass="carousel-container"
-          itemClass="carousel-item"
-        >
-          {
-            data?.map((val,i)=>{
-              let image=val?.profile_path?url?.profile+val?.profile_path:No;
-              return <div className="innerDiv" key={i}>
-                <div className="imgDiv"><LazyLoading src={image}/></div>
-              <p className="pname">{val?.name || val?.original_name}</p>
-              <p className="pchar">{val?.character}</p>
-
-              </div>
-            })
-          }
+            responsive={responsive}
+            swipeable={true}
+            draggable={true}
+            containerClass="carousel-container"
+            itemClass="carousel-item"
+          >
+            {data?.map((val, i) => {
+              let image = val?.profile_path
+                ? url?.profile + val?.profile_path
+                : No;
+              return (
+                <div className="innerDiv" key={i}>
+                  <div className="imgDiv">
+                    <LazyLoading src={image} />
+                  </div>
+                  <p className="pname">{val?.name || val?.original_name}</p>
+                  <p className="pchar">{val?.character}</p>
+                </div>
+              );
+            })}
           </Carousel>
         </div>
       ) : (
         <div className="load1">
-          <Shimmer3/>
-          <Shimmer3/>
-          <Shimmer3/>
-          <Shimmer3/>
-          <Shimmer3/>
-          <Shimmer3/>
+          {isMobile ? (
+            <>
+              <Shimmer3 />
+              <Shimmer3 />
+            </>
+          ) : (
+            <>
+              <Shimmer3 />
+              <Shimmer3 />
+              <Shimmer3 />
+              <Shimmer3 />
+              <Shimmer3 />
+              <Shimmer3 />
+            </>
+          )}
         </div>
       )}
     </Wrapper>
@@ -72,18 +98,17 @@ const TopCast = ({ data, load }) => {
 export default TopCast;
 
 const Wrapper = styled.div`
-padding: 2rem 20rem;
-width: 100%;
-height: fit-content;
+  padding: 2rem 20rem;
+  width: 100%;
+  height: fit-content;
 
-.load1{
-width: 100%;
-height: fit-content;
-display: flex;
-}
+  .load1 {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+  }
 
-
-.carousel-container {
+  .carousel-container {
     width: 100% !important;
   }
 
@@ -91,64 +116,144 @@ display: flex;
     width: 100% !important;
   }
 
+  .ptop {
+    font-size: 2rem;
+    font-weight: 500;
+    color: #ffffff;
+    margin-left: 1rem;
+  }
 
-.ptop{
-  font-size: 2rem;
-  font-weight: 500;
-  color: #FFFFFF;
-  margin-left: 1rem;
-}
+  .mainDiv {
+    display: flex;
+    margin-top: 1rem;
 
-.mainDiv{
-  display: flex;
-  margin-top: 1rem;
+    .innerDiv {
+      width: fit-content;
+      height: fit-content;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      margin: 0rem 1rem;
 
-.innerDiv{
-  width: fit-content;
-  height: fit-content;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  margin: 0rem 1rem;
-  
-  .imgDiv{
-    width: 15rem;
-    height: 15rem;
-    .lazy-load-image-background {
-      width: 100%;
-      height: 100%;
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center;
-        border-radius: 50%;
+      .imgDiv {
+        width: 15rem;
+        height: 15rem;
+        .lazy-load-image-background {
+          width: 100%;
+          height: 100%;
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 50%;
+          }
+        }
+      }
 
+      .pname {
+        color: #ffffff;
+        font-size: 1.4rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: 12rem;
+        text-align: center;
+      }
+      .pchar {
+        color: var(--dim1);
+        font-size: 1.2rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: 12rem;
+        text-align: center;
       }
     }
   }
 
-  .pname{
-   color: #FFFFFF;
-  font-size: 1.4rem;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  width: 12rem;
-  text-align: center;
+  @media (min-width: 390px) and (max-width: 768px) {
+    padding: 4rem 4rem;
+    width: 100%;
+    height: fit-content;
 
+    .react-multiple-carousel__arrow--left {
+      display: none;
     }
-    .pchar{
-  color: var(--dim1);
-  font-size: 1.2rem;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  width: 12rem;
-  text-align: center;
+    .react-multiple-carousel__arrow--right {
+      display: none;
     }
-}
 
-}
+    .load1 {
+      width: 100%;
+      height: fit-content;
+      display: flex;
+    }
+
+    .carousel-container {
+      width: 100% !important;
+    }
+
+    .carousel-item {
+      width: 100% !important;
+    }
+
+    .ptop {
+      font-size: 2rem;
+      font-weight: 500;
+      color: #ffffff;
+      margin-left: 1rem;
+    }
+
+    .mainDiv {
+      display: flex;
+      margin-top: 1rem;
+
+      .innerDiv {
+        width: fit-content;
+        height: fit-content;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin: 0rem 1rem;
+
+        .imgDiv {
+          width: 13.2rem;
+          height: 13.2rem;
+          .lazy-load-image-background {
+            width: 100%;
+            height: 100%;
+            img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+              object-position: center;
+              border-radius: 50%;
+            }
+          }
+        }
+
+        .pname {
+          color: #ffffff;
+          font-size: 1.4rem;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          width: 12rem;
+          text-align: center;
+        }
+        .pchar {
+          color: var(--dim1);
+          font-size: 1.2rem;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          width: 12rem;
+          text-align: center;
+        }
+      }
+    }
+  }
 `;

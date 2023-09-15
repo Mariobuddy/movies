@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Icon from "../../assests/play.png";
 import LazyLoading from "../../components/Lazy/LazyLoading";
@@ -30,6 +30,19 @@ const VideoSection = ({ data, loading }) => {
       slidesToSlide: 1,
     },
   };
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    function handleResize() {
+      setIsMobile(window.innerWidth <= 768);
+    }
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   return (
     <Wrapper>
       <p className="ptop">Official Videos</p>
@@ -74,9 +87,17 @@ const VideoSection = ({ data, loading }) => {
         </div>
       ) : (
         <div className="load2">
-          <Shimmer4 />
-          <Shimmer4 />
-          <Shimmer4 />
+          {isMobile ? (
+            <>
+              <Shimmer4 />
+            </>
+          ) : (
+            <>
+              <Shimmer4 />
+              <Shimmer4 />
+              <Shimmer4 />
+            </>
+          )}
         </div>
       )}
     </Wrapper>
@@ -86,7 +107,7 @@ const VideoSection = ({ data, loading }) => {
 export default VideoSection;
 
 const Wrapper = styled.div`
-position: relative;
+  position: relative;
   padding: 2rem 20rem;
   width: 100%;
   height: fit-content;
@@ -144,6 +165,69 @@ position: relative;
           position: absolute;
           top: 35%;
           left: 43%;
+        }
+      }
+    }
+  }
+
+  @media (min-width: 390px) and (max-width: 768px) {
+    position: relative;
+    padding: 2rem 4rem;
+    width: 100%;
+    height: fit-content;
+    .react-multiple-carousel__arrow--left {
+      display: none;
+    }
+    .react-multiple-carousel__arrow--right {
+      display: none;
+    }
+
+    .load2 {
+      padding: 2rem 0rem;
+      width: 100%;
+      height: fit-content;
+      display: flex;
+    }
+
+    .ptop {
+      font-size: 2rem;
+      font-weight: 500;
+      color: #ffffff;
+    }
+
+    .mainDiv {
+      display: flex;
+      overflow: hidden;
+      margin-top: 1.3rem;
+
+      .innerDiv {
+        width: 37rem;
+        height: 25rem;
+        width: fit-content;
+        height: fit-content;
+        margin-right: 1rem;
+
+        .imgDiv {
+          position: relative;
+          display: flex;
+          .lazy-load-image-background {
+            width: 100%;
+            height: 100%;
+            img {
+              width: 31rem;
+              height: 18rem;
+              border-radius: 0.4rem;
+            }
+          }
+          .done {
+            width: 5rem;
+            height: 5rem;
+            cursor: pointer;
+            z-index: 1;
+            position: absolute;
+            top: 35%;
+            left: 43%;
+          }
         }
       }
     }

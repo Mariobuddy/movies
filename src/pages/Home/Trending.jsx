@@ -17,7 +17,7 @@ const Trending = () => {
       <div className="topDiv">
         <div className="upperDiv">
           <p>Trending</p>
-          <Switch onTabChange={onTabChange} data1={data1}/>
+          <Switch onTabChange={onTabChange} data1={data1} />
         </div>
         <CarouselCom data={def} loading={loading} end={endPoint} />
       </div>

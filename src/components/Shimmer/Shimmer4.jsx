@@ -6,9 +6,9 @@ import "react-loading-skeleton/dist/skeleton.css";
 const Shimmer4 = () => {
   return (
     <Wrapper>
-        <div className="innerDiv">
-          <Skeleton className="ani" width={370} height={250} />
-        </div>
+      <div className="innerDiv">
+        <Skeleton className="ani imgOne" />
+      </div>
     </Wrapper>
   );
 };
@@ -25,38 +25,30 @@ const shimmer = keyframes`
 `;
 
 const Wrapper = styled.div`
-    margin-top: 1rem;
-    margin-right: 1rem;
+  margin-top: 1rem;
+  margin-right: 1rem;
 
-    .ani {
-      animation: ${shimmer} 1s linear infinite;
-    }
+  .ani {
+    animation: ${shimmer} 1s linear infinite;
+  }
 
-    .innerDiv {
+  .innerDiv {
+    width: 37rem;
+    height: 25rem;
+    .imgOne {
       width: 37rem;
       height: 25rem;
+    }
+  }
 
-      .imgDiv {
-        position: relative;
-        display: flex;
-        .lazy-load-image-background {
-          width: 100%;
-          height: 100%;
-          img {
-            width: 37rem;
-            height: 20rem;
-            border-radius: 0.4rem;
-          }
-        }
-        .done {
-          width: 5rem;
-          height: 5rem;
-          cursor: pointer;
-          z-index: 1;
-          position: absolute;
-          top: 35%;
-          left: 43%;
-        }
+  @media (min-width: 390px) and (max-width: 768px) {
+    .innerDiv {
+      width: 31rem;
+      height: 18rem;
+      .imgOne {
+        width: 31rem;
+        height: 18rem;
       }
     }
+  }
 `;
