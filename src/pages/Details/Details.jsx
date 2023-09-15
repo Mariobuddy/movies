@@ -3,6 +3,8 @@ import { styled } from "styled-components";
 import DetailBanner from "./DetailBanner";
 import useFetch from "../../hooks/useFetch";
 import { useParams } from "react-router-dom";
+import TopCast from "./TopCast";
+import VideoSection from "./VideoSection";
 
 const Details = () => {
   const { mediaType, id } = useParams();
@@ -13,7 +15,9 @@ const Details = () => {
 
   return (
     <Wrapper>
-      <DetailBanner video={data?.results[0]} crew={credits?.crew} />
+      <DetailBanner video={data?.results[0]} load={loading} crew={credits?.crew} />
+      <TopCast data={credits?.cast} load={creditLoad}/>
+      <VideoSection data={data} loading={loading}/>
     </Wrapper>
   );
 };

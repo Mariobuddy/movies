@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { styled } from "styled-components";
 import { useSelector } from "react-redux";
 import LazyLoading from "../../components/Lazy/LazyLoading";
@@ -9,8 +9,12 @@ import { useParams } from "react-router-dom";
 import FallPoster from "../../assests/7718877.jpg";
 import dayjs from "dayjs";
 import Player from "../../assests/play.png";
+import Shimmer2 from "../../components/Shimmer/Shimmer2";
+import VideoPop from "../../components/PopVideo/VideoPop";
 
-const DetailBanner = ({ video, crew }) => {
+const DetailBanner = ({ video, crew, load }) => {
+  const [show, setShow] = useState(false);
+  const [videoId, setVideoId] = useState(null);
   const { url } = useSelector((state) => state.home);
   const { mediaType, id } = useParams();
   const { data, loading } = useFetch(`/${mediaType}/${id}`);
@@ -19,6 +23,11 @@ const DetailBanner = ({ video, crew }) => {
   let genData = data?.genres?.map((val) => {
     return val.id;
   });
+
+  const popIt = () => {
+    setShow(true);
+    setVideoId(video?.key);
+  };
 
   let convertMinutesToHoursAndMinutes = (minutes) => {
     const hours = Math.floor(minutes / 60); // Calculate hours
@@ -58,7 +67,7 @@ const DetailBanner = ({ video, crew }) => {
                 rating={data?.vote_average.toFixed(1)}
                 className="cSend"
               />
-              <img src={Player} alt="Player" />
+              <img src={Player} alt="Player" onClick={popIt} />
               <p>Watch Trailor</p>
             </div>
             <p className="pOver">Overview</p>
@@ -103,9 +112,19 @@ const DetailBanner = ({ video, crew }) => {
               })}
             </div>
           </div>
+          <VideoPop
+            widthOne={"50%"}
+            load={load}
+            setShow={setShow}
+            show={show}
+            videoID={videoId}
+            setVideoId={setVideoId}
+          />
         </div>
       ) : (
-        <div className="laod"></div>
+        <div className="load">
+          <Shimmer2 />
+        </div>
       )}
     </Wrapper>
   );
@@ -120,6 +139,14 @@ const Wrapper = styled.div`
   padding-top: 10rem;
   color: #ffffff;
   position: relative;
+
+  .load {
+    width: 100%;
+    height: 60rem;
+    position: relative;
+    color: #ffffff;
+    position: relative;
+  }
 
   .imgDiv {
     position: absolute;
@@ -191,6 +218,8 @@ const Wrapper = styled.div`
         font-size: 3rem;
         font-weight: 500;
         white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
       }
 
       .ptag {
@@ -214,6 +243,9 @@ const Wrapper = styled.div`
         width: 5rem;
         height: 5rem;
         cursor: pointer;
+
+        &:hover {
+        }
       }
     }
 

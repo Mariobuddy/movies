@@ -9,9 +9,10 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import Shimmer from "../Shimmer/Shimmer";
 import { useNavigate } from "react-router-dom";
+import LazyLoading from "../Lazy/LazyLoading";
 
-const CarouselCom = ({ loading, data,end }) => {
-  const navigate=useNavigate();
+const CarouselCom = ({ loading, data, end }) => {
+  const navigate = useNavigate();
   const [resShimmer, setResShimmer] = useState(false);
   const responsive = {
     superLargeDesktop: {
@@ -68,13 +69,26 @@ const CarouselCom = ({ loading, data,end }) => {
                 datainner?.release_date || datainner?.first_air_date
               );
               return (
-                <div key={i} className="mainDiv3" onClick={()=>navigate(`${datainner?.media_type||end}/${datainner?.id}`)}>
+                <div
+                  key={i}
+                  className="mainDiv3"
+                  onClick={() =>
+                    navigate(`${datainner?.media_type || end}/${datainner?.id}`)
+                  }
+                >
                   <div className="fDiv">
-                    <img src={poster} alt="Rohit" />
+                    <div className="imgDiv1">
+                      <LazyLoading src={poster} />
+                    </div>
                     <CircleRating
-                      rating={datainner?.vote_average?.toFixed(1)} className="cSend"
+                      rating={datainner?.vote_average?.toFixed(1)}
+                      className="cSend"
                     />
-                    <Genres val={datainner?.genre_ids} className="fSend" className2="sSend" />
+                    <Genres
+                      val={datainner?.genre_ids}
+                      className="fSend"
+                      className2="sSend"
+                    />
                   </div>
                   <div className="sDiv">
                     <p className="p1">
@@ -108,40 +122,38 @@ const CarouselCom = ({ loading, data,end }) => {
 
 export default CarouselCom;
 
-
 const Wrapper = styled.div`
   width: 100%;
 
-  .cSend{
-  position: absolute;
-  bottom: -2rem;
-  left: 0;
-  width: 4rem;
-  height: 4rem;
+  .cSend {
+    position: absolute;
+    bottom: -2rem;
+    left: 0;
+    width: 4rem;
+    height: 4rem;
   }
 
-  
-.fSend{
-  font-size: 1.4rem;
+  .fSend {
+    font-size: 1.4rem;
     display: flex;
-    color: #FFFFFF;
+    color: #ffffff;
     flex-direction: column;
     width: fit-content;
     background-color: #dd1f58;
     padding: 0.4rem;
     border-radius: 0.4rem;
     margin-bottom: 0.5rem;
-}
+  }
 
-.sSend{
-position: absolute;
-bottom: 0;
-right: 0;
-display: flex;
-justify-content: center;
-align-items: flex-end;
-flex-direction: column;
-}
+  .sSend {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    flex-direction: column;
+  }
 
   .carousel-container {
     width: 100% !important;
@@ -170,9 +182,20 @@ flex-direction: column;
       .fDiv {
         height: fit-content;
         position: relative;
-        img {
+
+        .imgDiv1 {
           width: 25rem;
           height: 35rem;
+          .lazy-load-image-background {
+            width: 100%;
+            height: 100%;
+            img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+              object-position: center;
+            }
+          }
         }
       }
       .sDiv {
@@ -229,9 +252,19 @@ flex-direction: column;
         .fDiv {
           height: fit-content;
           position: relative;
-          img {
+          .imgDiv1 {
             width: 32rem;
             height: 40rem;
+            .lazy-load-image-background {
+              width: 100%;
+              height: 100%;
+              img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center;
+              }
+            }
           }
         }
         .sDiv {
