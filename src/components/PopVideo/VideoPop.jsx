@@ -1,16 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React,{useState,useEffect} from "react";
 import styled from "styled-components";
 import ReactPlayer from "react-player/youtube";
 
-const VideoPop = ({
-  show,
-  setShow,
-  videoID,
-  setVideoId,
-  load,
-  widthOne,
-  widthTwo,
-}) => {
+const VideoPop = ({ show, setShow, videoID, setVideoId, load, widthOne,widthTwo }) => {
   let del = () => {
     setShow(false);
     setVideoId(null);
@@ -29,21 +21,19 @@ const VideoPop = ({
     };
   }, []);
   return (
-    <Wrapper style={{ display: show ? "block" : "none" }}>
-      {!load && videoID !== undefined ? (
+    <Wrapper style={{ display: show && videoID!==undefined ? "block" : "none" }}>
+      {!load ? (
         <div className="mainDiv" onClick={del}>
           <span onClick={del}>Close</span>
           <ReactPlayer
             url={`url='https://www.youtube.com/watch?v=${videoID}'`}
             controls
-            width={isMobile ? widthTwo : widthOne}
-            height={isMobile ? "45%" : widthOne}
+            width={isMobile?widthTwo:widthOne}
+            height={isMobile?"45%":widthOne}
           />
         </div>
       ) : (
-        <div className="load">
-          <p>Video Not Found</p>
-        </div>
+        <div className="load"><p>Video Not Found</p></div>
       )}
     </Wrapper>
   );
@@ -62,18 +52,18 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   background-color: #06060654;
-  border: 2px solid red;
 
   .visible {
     display: block;
   }
 
-  .load {
+  .load{
     display: flex;
     justify-content: center !important;
     align-items: center !important;
+    width: 100%;
+    height: 100%;
     flex-direction: column;
-    border: 2px solid green;
   }
   .hide {
     display: none;
@@ -86,6 +76,7 @@ const Wrapper = styled.div`
     width: 100%;
     height: 100%;
     flex-direction: column;
+    
 
     span {
       font-size: 2rem;
@@ -102,24 +93,29 @@ const Wrapper = styled.div`
     }
   }
 
-  @media (min-width: 390px) and (max-width: 768px) {
-    .visible {
-      display: block;
-    }
+  @media (min-width:390px) and (max-width:768px){
 
-    .hide {
-      display: none;
-    }
+  .visible {
+    display: block;
+  }
 
-    .mainDiv {
-      display: flex;
-      justify-content: center !important;
-      align-items: center !important;
+  .hide {
+    display: none;
+  }
 
-      span {
-        font-size: 1.5rem;
-        left: 14rem !important;
-      }
+  .mainDiv {
+    display: flex;
+    justify-content: center !important;
+    align-items: center !important;
+    
+
+    span {
+      font-size: 1.5rem;
+      left: 14rem !important;
+      
     }
+  }
+
+
   }
 `;
