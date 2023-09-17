@@ -5,6 +5,8 @@ import useFetch from "../../hooks/useFetch";
 import { useParams } from "react-router-dom";
 import TopCast from "./TopCast";
 import VideoSection from "./VideoSection";
+import Similar from "./Similar";
+import Recom from "./Recom";
 
 const Details = () => {
   const { mediaType, id } = useParams();
@@ -18,6 +20,8 @@ const Details = () => {
       <DetailBanner video={data?.results[0]} load={loading} crew={credits?.crew} />
       <TopCast data={credits?.cast} load={creditLoad}/>
       <VideoSection data={data} loading={loading}/>
+      <Similar mediaType={mediaType} id={id}/>
+      <Recom mediaType={mediaType} id={id}/>
     </Wrapper>
   );
 };

@@ -35,7 +35,7 @@ const Wrapper = styled.div`
   border-radius: 0.2rem;
   height: 43.8rem;
   width: 27.2rem;
-  margin: 0rem 1rem 0rem 1.2rem;
+  margin: 0rem 1rem 2rem 1.2rem;
 
   .fDiv {
     height: fit-content;

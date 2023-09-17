@@ -11,7 +11,7 @@ import Shimmer from "../Shimmer/Shimmer";
 import { useNavigate } from "react-router-dom";
 import LazyLoading from "../Lazy/LazyLoading";
 
-const CarouselCom = ({ loading, data, end }) => {
+const CarouselCom = ({ loading, data, end,title }) => {
   const navigate = useNavigate();
   const [resShimmer, setResShimmer] = useState(false);
   const responsive = {
@@ -52,6 +52,7 @@ const CarouselCom = ({ loading, data, end }) => {
   }, []);
   return (
     <Wrapper>
+      {title && <p className="pt">{title}</p>}
       {!loading && data?.results?.length > 0 ? (
         <div className="mainDiv2">
           <Carousel
@@ -72,8 +73,10 @@ const CarouselCom = ({ loading, data, end }) => {
                 <div
                   key={i}
                   className="mainDiv3"
-                  onClick={() =>
-                    navigate(`${datainner?.media_type || end}/${datainner?.id}`)
+                  onClick={() =>{
+                    // navigate(`${datainner?.media_type || end}/${datainner?.id}`)
+                    navigate(`../${datainner?.media_type || end}/${datainner?.id}`, { replace: true });
+                  }
                   }
                 >
                   <div className="fDiv">
@@ -83,6 +86,8 @@ const CarouselCom = ({ loading, data, end }) => {
                     <CircleRating
                       rating={datainner?.vote_average?.toFixed(1)}
                       className="cSend"
+                      text="black"
+                      bg="#FFFFFF"
                     />
                     <Genres
                       val={datainner?.genre_ids}
@@ -130,6 +135,13 @@ const Wrapper = styled.div`
     left: 0;
     width: 4rem;
     height: 4rem;
+  }
+
+  .pt{
+    color: #FFFFFF;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    margin-left: 0.8rem;
   }
 
   .fSend {

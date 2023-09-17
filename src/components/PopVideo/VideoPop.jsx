@@ -1,26 +1,49 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import ReactPlayer from "react-player/youtube";
 
-const VideoPop = ({ show, setShow, videoID, setVideoId, load, widthOne }) => {
+const VideoPop = ({
+  show,
+  setShow,
+  videoID,
+  setVideoId,
+  load,
+  widthOne,
+  widthTwo,
+}) => {
   let del = () => {
     setShow(false);
     setVideoId(null);
   };
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    function handleResize() {
+      setIsMobile(window.innerWidth <= 768);
+    }
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   return (
     <Wrapper style={{ display: show ? "block" : "none" }}>
-      {!load ? (
+      {!load && videoID !== undefined ? (
         <div className="mainDiv" onClick={del}>
           <span onClick={del}>Close</span>
           <ReactPlayer
             url={`url='https://www.youtube.com/watch?v=${videoID}'`}
             controls
-            width={widthOne}
-            height={"50%"}
+            width={isMobile ? widthTwo : widthOne}
+            height={isMobile ? "45%" : widthOne}
           />
         </div>
       ) : (
-        ""
+        <div className="load">
+          <p>Video Not Found</p>
+        </div>
       )}
     </Wrapper>
   );
@@ -35,25 +58,34 @@ const Wrapper = styled.div`
   top: 0;
   left: 0;
   display: flex;
+  z-index: 88888;
   justify-content: center;
   align-items: center;
   background-color: #06060654;
+  border: 2px solid red;
+
   .visible {
     display: block;
   }
 
+  .load {
+    display: flex;
+    justify-content: center !important;
+    align-items: center !important;
+    flex-direction: column;
+    border: 2px solid green;
+  }
   .hide {
     display: none;
   }
 
   .mainDiv {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: center !important;
+    align-items: center !important;
     width: 100%;
     height: 100%;
     flex-direction: column;
-    border: 2px solid transparent;
 
     span {
       font-size: 2rem;
@@ -61,11 +93,32 @@ const Wrapper = styled.div`
       font-weight: 500;
       transition: all 0.2s ease;
       position: relative;
-      left: 31rem;
+      left: 31.5rem !important;
       color: #ffffff;
 
       &:hover {
         color: orangered;
+      }
+    }
+  }
+
+  @media (min-width: 390px) and (max-width: 768px) {
+    .visible {
+      display: block;
+    }
+
+    .hide {
+      display: none;
+    }
+
+    .mainDiv {
+      display: flex;
+      justify-content: center !important;
+      align-items: center !important;
+
+      span {
+        font-size: 1.5rem;
+        left: 14rem !important;
       }
     }
   }

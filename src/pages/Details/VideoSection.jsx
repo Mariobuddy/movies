@@ -83,6 +83,7 @@ const VideoSection = ({ data, loading }) => {
             videoID={videoId}
             setVideoId={setVideoId}
             widthOne={"45%"}
+            widthTwo={"84%"}
           />
         </div>
       ) : (

@@ -66,6 +66,8 @@ const DetailBanner = ({ video, crew, load }) => {
               <CircleRating
                 rating={data?.vote_average.toFixed(1)}
                 className="cSend"
+                text="#FFFFFF"
+                bg="transparent"
               />
               <img src={Player} alt="Player" onClick={popIt} />
               <p>Watch Trailor</p>
@@ -114,6 +116,7 @@ const DetailBanner = ({ video, crew, load }) => {
           </div>
           <VideoPop
             widthOne={"50%"}
+            widthTwo={"100%"}
             load={load}
             setShow={setShow}
             show={show}

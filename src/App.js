@@ -36,6 +36,7 @@ const App = () => {
   }, []);
 
   const genresAll = async () => {
+   try {
     let promises = [];
     let endPoints = ["tv", "movie"];
     let allPromises = {};
@@ -51,6 +52,9 @@ const App = () => {
     });
 
     dispatch(getGenres(allPromises));
+   } catch (error) {
+     return error
+   }
   };
 
   return (
@@ -59,12 +63,12 @@ const App = () => {
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="*" element={<Explore />} />
+          <Route path="/explore/:mediaType" element={<Explore />} />
           <Route path="/:mediaType/:id" element={<Details />} />
           <Route path="/search/:query" element={<SearchResults />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
-        {/* <Footer /> */}
+        <Footer />
       </ThemeProvider>
     </BrowserRouter>
   );

@@ -60,7 +60,9 @@ const Header = () => {
   return (
     <Wrapper className={currentScroll}>
       <div className="left">
-        <img alt="Mario" src={Mario} />
+        <img alt="Mario" src={Mario} onClick={()=>{
+         navigate("/");
+        }}/>
       </div>
       <div className="right">
         <ul className={show ? "visible anime" : ""}>
@@ -84,6 +86,7 @@ const Header = () => {
           <input
             placeholder="Search for a movie or tv show..."
             type="text"
+            value={query}
             onChange={(e) => {
               setQuery(e.target.value);
             }}
@@ -91,12 +94,17 @@ const Header = () => {
               if (e.key === "Enter" && query.length > 0) {
                 navigate(`/search/${query}`);
                 setDownInp(false);
+                setQuery("");
               }
             }}
           />
           <AiOutlineClose
             className="downLogo"
-            onClick={() => setDownInp(false)}
+            onClick={() =>{
+               setDownInp(false)
+               setQuery("");
+              }
+            }
           />
         </div>
         <div className="mobile">
@@ -182,6 +190,7 @@ const Wrapper = styled.div`
       width: 6rem;
       height: 6rem;
       margin-top: 1.4rem;
+      cursor: pointer;
     }
   }
 

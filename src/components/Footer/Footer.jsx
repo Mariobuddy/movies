@@ -12,6 +12,7 @@ const Footer = () => {
           Talk to us today
         </p>
         {/* <Button className='buts'>Get Started</Button> */}
+        <Button>Get Started</Button>
       </div>
 
       <div className="div2">
@@ -26,7 +27,7 @@ const Footer = () => {
           <div className="info2">
             <p>Subscribe to get important update</p>
             <input type={"text"} placeholder="YOUR E-MAIL" />
-            {/* <Button className='buts2'>SUBSCRIBE</Button> */}
+            <Button>SUBSCRIBE</Button>
           </div>
           <div className="info3">
             <p>Follow Us</p>
@@ -73,6 +74,23 @@ const Footer = () => {
 
 export default Footer;
 
+const Button=styled.button`
+background-color: orangered;
+padding: 1rem 1.5rem;
+outline: none;
+color: #FFFFFF;
+border: none;
+border-radius: 0.2rem;
+cursor: pointer;
+&:hover{
+  border-radius: 1rem;
+}
+
+@media (min-width:390px) and (max-width:768px){
+  padding: 0.8rem 1rem;
+  white-space: nowrap;
+}`;
+
 const Wrapper = styled.div`
   width: 100%;
   height: 50vh;
@@ -80,14 +98,14 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   position: relative;
-  background-color: #0c011f;
+  background-color: #04152d;
   bottom: 0;
 
   .div3 {
-    background-color: #0c011f;
+    background-color: #01060d;
     height: 6vh;
     width: 100%;
-
+z
     .down {
       margin-top: 0.5rem;
       font-size: 1.2rem;
@@ -129,7 +147,7 @@ const Wrapper = styled.div`
   .div2 {
     height: 32vh;
     width: inherit;
-    background-color: #0c011f;
+    background-color: #01060d;
     padding: 8rem 34rem 0rem 34rem;
     color: #ffffff;
     display: flex;
@@ -253,7 +271,6 @@ const Wrapper = styled.div`
     left: 0;
 
     .div3 {
-      background-color: #51087e;
       height: 6vh;
       width: 100vw;
 
@@ -299,7 +316,6 @@ const Wrapper = styled.div`
     .div2 {
       height: 24vh;
       width: inherit;
-      background-color: #51087e;
       padding: 5rem 4rem 0rem 4rem;
       color: #ffffff;
       display: flex;
